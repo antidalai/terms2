@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ChatGPT Extension</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- use styles.css for extension and styles2.css for the webpage  -->
+    <script src="popup.js" defer></script>
+</head>
+
+<body>
+    <h1>Terms Summarizer</h1>
+    <textarea id="prompt" placeholder="Enter your Terms document here..."></textarea>
+
+
+    <form>
+        <h3>Select your preferences:</h3>
+        <div>
+            <input type="checkbox" id="option1" name="options" value="Privacy">
+            <label for="option1">Privacy</label>
+        </div>
+        <div>
+            <input type="checkbox" id="option2" name="options" value="Termination">
+            <label for="option2">Termination</label>
+        </div>
+        <div>
+            <input type="checkbox" id="option3" name="options" value="User Responsibilities">
+            <label for="option3">User Responsibilities</label>
+        </div>
+        <div>
+            <input type="checkbox" id="option4" name="options" value="Liability">
+            <label for="option4">Liability</label>
+        </div>
+    </form>
+    <br>
+    <button id="submit">Submit</button>
+
+    <div id="response"><span class="placeholder">Response will appear here in a few seconds...</span></div>
+
+</body>
+
+</html>
