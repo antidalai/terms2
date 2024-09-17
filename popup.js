@@ -14,34 +14,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedValues.push(checkbox.value);
             });
 
-            let chatPrompt = 'Your job is to read and effectively summarize terms and conditions or terms of use documents that are given to you. Pay special attention to ' + selectedValues.join(', ') + '. Your answer should be simply worded and on multiple different lines in a bullet point format. ';
-
-            fetch('https://api.openai.com/v1/chat/completions', {
+            fetch('http://localhost:4000/api', { // Changed URL to your local server
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer code'
                 },
                 body: JSON.stringify({
-                    model: "gpt-3.5-turbo",
-                    messages: [
-                        { role: "system", content: chatPrompt },
-                        { role: "user", content: prompt }
-                    ],
-                    max_tokens: 200
+                    prompt: prompt,
+                    selectedValues: selectedValues
                 })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.choices && data.choices.length > 0) {
                         responseElement.textContent = data.choices[0].message.content.trim();
-                        responseElement.classList.add('filled');
+                        responseElement.classList.add('filled'); // dealing with the css from the responses
+                        // ^ this is the one that is going to run basically all of the time
+                    } else if (data.error) {
+                        responseElement.textContent = 'Error: ' + data.error.message;
+                        responseElement.classList.remove('filled');
                     } else {
                         responseElement.textContent = 'No response from API.';
                         responseElement.classList.remove('filled');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    responseElement.textContent = 'An error occurred.';
+                    responseElement.classList.remove('filled');
+                });
         });
     } else {
         console.error('One or more elements not found in the DOM');

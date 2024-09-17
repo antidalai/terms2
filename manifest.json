@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "Terms and Conditions Summarizer",
-    "version": "1.0",
+    "name": "Terms and Conditions Summarizer 2",
+    "version": "2.0",
     "description": "Chrome extension that calls a custom GPT to summarize a terms and conditions document",
     "background": {
         "service_worker": "background.js"
